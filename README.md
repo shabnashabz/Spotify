@@ -81,12 +81,13 @@ where stream > 1000000000;
    order by 1;
    ```
 3. Get the total number of comments for tracks where `licensed = TRUE`.
-   ```
+  
+   ```sql
    select sum(comments) as total_comments from spotify
    where licensed =  'true';
    ```
-4. Find all tracks that belong to the album type `single`.
-   ```
+4. Find all tracks that belong to the album type `single`. 
+```sql
    select track from spotify
    where album_type = 'single';
    ```
@@ -98,7 +99,7 @@ where stream > 1000000000;
     ```
 ### Medium Level
 1. Calculate the average danceability of tracks in each album.
- ```
+```sql
  select album,
  avg(danceability) as avg_dancibility
  from spotify
@@ -107,7 +108,7 @@ where stream > 1000000000;
 ```
 
 2. Find the top 5 tracks with the highest energy values.
- ```
+```sql
 select track,
    max(energy) as top_5_tracks
  from spotify
@@ -118,7 +119,8 @@ select track,
 ```
 
 3. List all tracks along with their views and likes where `official_video = TRUE`.
-```
+
+```sql
 select  track,
        sum(views)as total_views,
 	   sum(likes)as total_likes
@@ -128,7 +130,8 @@ select  track,
  order by 2 desc;
 ```
 4. For each album, calculate the total views of all associated tracks.
-```
+
+```sql
 select album,
      track,
 	 sum(views) as total_views
@@ -137,7 +140,8 @@ group by 1,2
 order by 3 desc;
 ```
 5. Retrieve the track names that have been streamed on Spotify more than YouTube.
- ```
+
+```sql
 select * from
 (select track,
        --most_played_on,
@@ -154,7 +158,8 @@ limit 10;
 
 ### Advanced Level
 1. Find the top 3 most-viewed tracks for each artist using window functions.
-```
+
+```sql
 with ranking_artist
 as
 (select artist,
@@ -169,7 +174,8 @@ select * from ranking_artist
 where rank <= 3
 ```
 2. Write a query to find tracks where the liveness score is above the average.
-   ```
+ 
+```sql
    select * from spotify
    where liveness >(select avg(liveness) from spotify)
    ```
@@ -192,7 +198,7 @@ ORDER BY 2 DESC
 ```
    
 4. Find tracks where the energy-to-liveness ratio is greater than 1.2.
-   ```
+```sql
    SELECT
     track,
     energy,
@@ -202,7 +208,7 @@ ORDER BY 2 DESC
    WHERE energy / liveness > 1.2;
    ```
 5. Calculate the cumulative sum of likes for tracks ordered by the number of views, using window functions.
-   ```
+```sql
    SELECT
     track,
     views,
